@@ -6,8 +6,10 @@
 
 #include <string.h>
 #include <EEPROM.h>
-#include "ampduino.h"
+#define	EEPROM_C
 #include "eeprom-data.h"
+#include "ampduino.h"
+// create data array
 
 AmpduinoConfig cfg;
 

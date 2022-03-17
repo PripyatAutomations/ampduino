@@ -1802,7 +1802,7 @@ ifneq ($(strip $(AVRDUDE_ISP_FUSES_POST)),)
 		$(AVRDUDE) $(AVRDUDE_COM_OPTS) $(AVRDUDE_ISP_OPTS) $(AVRDUDE_ISP_FUSES_POST)
 endif
 
-clean::
+arduino-clean::
 		$(REMOVE) $(OBJDIR)
 
 size:	$(TARGET_HEX)
@@ -1909,8 +1909,8 @@ help:
 "
 	@$(ECHO) "Please refer to $(ARDMK_DIR)/Arduino.mk for more details.\n"
 
-.PHONY: all upload raw_upload raw_eeprom error_on_caterina reset reset_stty ispload \
-        clean depends size show_boards monitor disasm symbol_sizes generated_assembly \
+.PHONY: arduino-all upload raw_upload raw_eeprom error_on_caterina reset reset_stty ispload \
+        arduino-clean depends size show_boards monitor disasm symbol_sizes generated_assembly \
         generate_assembly verify_size burn_bootloader help pre-build tags debug debug_init
 
 # added - in the beginning, so that we don't get an error if the file is not present

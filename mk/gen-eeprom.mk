@@ -14,20 +14,24 @@ eeprom.c: eeprom-data.h
 	     > $@
 
 eeprom-data.h: .tmp.eeprom.user
-	> $@
-	echo "/*" >> $@
-	echo " * This header is auto-generated from system.cf by gen-eeprom in mk/gen-eeprom.mk" >> $@
-	echo " * " >> $@
-	echo " * Please do not edit it directly as it will be destroyed during build!" >> $@
-	echo " */" >> $@
-	echo "" >> $@
-	echo "#if !defined(_eeprom_data_h)" >> $@
-	echo "const char factory_defaults[] = "{ >> $@
-	cat .tmp.eeprom.user >> $@
-	echo "};" >> $@
-	echo "#else" >> $@
-	echo "extern const char factory_defaults[];" >> $@
-	echo "#endif" >> $@
+	@> $@
+	@echo "/*" >> $@
+	@echo " * This header is auto-generated from system.cf by gen-eeprom in mk/gen-eeprom.mk" >> $@
+	@echo " * " >> $@
+	@echo " * Please do not edit it directly as it will be destroyed during build!" >> $@
+	@echo " */" >> $@
+	@echo "" >> $@
+	@echo "#if !defined(_eeprom_data_h)" >> $@
+	@echo "#if defined(EEPROM_C)" >> $@
+	@echo "const char factory_defaults[] = "{ >> $@
+	@cat .tmp.eeprom.user >> $@
+	@echo "};" >> $@
+	@echo "#else" >> $@
+	@echo "extern const char factory_defaults[];" >> $@
+	@echo "// else defined(EEPROM_C)" >> $@
+	@echo "#endif" >> $@
+	@echo "// !defined(__eeprom_data_h)" >> $@
+	@echo "#endif" >> $@
 
 extra_headers += eeprom-data.h
 
