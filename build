@@ -1,5 +1,7 @@
 #!/bin/sh
 echo "Read INSTALL before using this..."
+git submodule init
+git submodule update
 make world
 
 if [ $? -eq 0 ]; then

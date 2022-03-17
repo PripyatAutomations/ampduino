@@ -1,5 +1,4 @@
-Please make sure RF24 is at ext/RF24/
- * Get it at: https://github.com/nRF24/RF24.git
+Be sure to git submodule init; git submodule update before trying to build
 
 *********************
 ** USE make world ***
