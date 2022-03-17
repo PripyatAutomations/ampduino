@@ -1673,7 +1673,7 @@ endif
 ########################################################################
 # Explicit targets start here
 
-all: 		${extra_headers} $(TARGET_EEP) $(TARGET_BIN) $(TARGET_HEX)
+arduino-all: 		${extra_headers} $(TARGET_EEP) $(TARGET_BIN) $(TARGET_HEX)
 
 # Rule to create $(OBJDIR) automatically. All rules with recipes that
 # create a file within it, but do not already depend on a file within it

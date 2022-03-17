@@ -1,3 +1,6 @@
 [submodule "ext/RF24"]
 	path = ext/RF24
 	url = https://github.com/nRF24/RF24.git
+[submodule "ubitx"]
+	path = ubitx
+	url = https://github.com/PripyatAutomations/ubitx-n8me.git

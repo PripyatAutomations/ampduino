@@ -1,4 +1,4 @@
-all: arduino-all
+all: world
 
 TARGET=ampduino
 AMPDUINO_VERSION=0.1
@@ -49,7 +49,7 @@ include mk/clean.mk
 include mk/install.mk
 
 # Build firmwares, if needed before our source
-world: firmware esp-serial-world all
+world: firmware esp-serial-world arduino-all
 
 TARBALL_DATE=$(date +%Y-%m-%d)
 
