@@ -5,6 +5,7 @@
 // and default settings should end up here.
 //
 // All other configuration should be stored
+// in eeprom configuration
 
 #if	!defined(_config_h)
 #define	_config_h

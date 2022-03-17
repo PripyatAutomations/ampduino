@@ -20,6 +20,7 @@ bool config_load(void) {
     memset(&cfg.status, 0, sizeof(cfg.status));
 
     // Initialize some hard-coded default configuration
+    //
     cfg.max_swr = MAX_SWR;
     cfg.max_power = MAX_POWER;
     cfg.monitor_atten = MONITOR_ATTEN;
