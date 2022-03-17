@@ -1,0 +1,63 @@
+[device]
+name=ampduino-v1
+id=amp1
+parent=radio1
+
+# allows naming pins for reuse below, non-recursive!
+[variables]
+AMP_BYPASS=
+
+[radio]
+id=radio1
+type=ubitx
+out_port=amp1
+max_output=10
+
+[amp]
+id=amp1
+min_input=1
+max_input=10
+max_output=70
+bypass_pin=%%AMP_BYPASS%%
+in_port=radio0
+out_port=filter1
+
+[filter]
+id=lpf1
+via=dual2003bob
+pins=
+in_port=amp1
+out_port=atu1
+
+[tuner]
+id=atu1
+in_port=lpf1
+out_port=sw1
+
+[switch]
+id=sw1
+inputs=2
+outputs=4
+in_port1=atu1
+# we could hook nano VNA here, if we had a way to get it's output back
+in_port2=none
+out_port1=antenna1
+out_port2=antenna2
+out_port3=none
+out_port4=dummy1
+
+[antenna]
+id=antenna1
+comment=40M dipole in the trees
+type=dipole
+
+[antenna]
+id=antenna2
+comment=10M magnetic loop
+type=magloop
+max_power=200
+
+[antenna]
+id=dummy1
+comment=100W dummy load (Max 2 min!)
+max_power=100

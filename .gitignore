@@ -1,0 +1,5 @@
+bin/*
+atu-100/build/*
+atu-100/debug/*
+atu-100/dist/*
+esp-serial/esp-serial.elf

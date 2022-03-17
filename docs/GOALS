@@ -1,0 +1,33 @@
+* Build a completely open source 100W HF radio based
+* Keep total station costs, excluding feedline and antennaes under $500
+
+  Approximate parts costs when ordered:
+	- ubitx v6			- $150
+	- Raspberry Pi 4b 8gb		- $70
+	- ATU-100 Tuner Kit		- $40
+	- RV3YKF LPF filter kit		- $42
+	- Mini-PA 70/100 kit		- $24
+	- Genuine transistors for PA	- $30
+	- RTL-SDR blog v3 SDR		- $25
+	- USB sound adaptor		- $7
+	- Homemade antenna switch	- $8
+	- Misc cables/adaptors		- $35
+	- Arduino mega2560		- $24
+	- Enclosure			- $6
+			Total: $461
+
+Yes, I could buy a smaller, fancier prebuilt radio for slightly more, but this has been
+built in stages as I progressed in my hobby. Why settle for a closed source radio system
+or QRP in 2022?
+
+Ideally this will save someone else a bit of trouble ;)
+
+
+Thanks to N3RYB for donating ubitx v6 to the project!
+
+Developed on Devuan aarch64, ymmv elsewhere.
+
+
+So far we've reduced ubitx firmware (N8ME firmware derived) from ~30kbytes down
+to 9kbytes to make room for ampduino, built most of the kits, and started on
+this mess you are viewing now ;)

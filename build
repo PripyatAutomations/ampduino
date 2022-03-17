@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Read INSTALL before using this..."
+make world
+
+if [ $? -eq 0 ]; then
+	echo "* Build successful. Read INSTALL for instructions to flash devices"
+else
+	echo "* Build failed. Review build output and submit a bug, if needed"
+fi

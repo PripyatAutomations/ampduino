@@ -1,0 +1,14 @@
+amplifier.cc		Support for amplifiers
+core.cc			Core stuff
+display.cc		i2c OLED or LCD display (text mode) support
+eeprom.cc		EEPROM based configuration
+lpf.cc			Low Pass Filters
+lora.cc			LoRa support
+nrf24.cpp		NRF24L01 module support
+protocol.cc		Inter-device communication protocol
+rotator.cc		Support for antenna rotors
+safety.cc		Safety features (SWR, Overtemp, low battery shutdowns)
+switch.cc		Support for antenna switches
+transmitter.cc		Support for transmitting devices
+transvert.cc		Support for transverters
+tuner.cc		Support for tuners

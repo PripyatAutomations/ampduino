@@ -1,0 +1,39 @@
+Pinouts for AMPduino
+--------------------
+	D1	serio RX from ATU-100 tuner
+	D2	serio TX to ATU-100 tuner
+	D3	LPF (Bands 1-8) Shift Register STROBE/select
+	D4	LPF (Bands 9-16) Shift Register STROBE/select
+	D5	Antenna Select (1-8) Shift Register STROBE/select
+	D6	Shared Shift Reg serial-out
+	D7	Amp power/bypass control
+	D8	T/R relay
+	D9	RX LNA power/bypass
+	D10	NR24L01 radio to ubitx (TX)
+	D11	NR24L01 radio to ubitx (CSN)
+	D12	NR24L01 radio to ubitx (CE)
+	D13	NR24L01 radio to ubitx (RX)
+	A01	Supply Voltage Sense
+	A02	Supply Current Sense
+
+LPF (Bands 1-8) Shift Register
+------------------------------
+O1	160m		O5	20m
+O2	80m		O6	17m
+O3	40m		O7	15m
+O4	30m		O8	12m
+
+LPF (Bands 9-16) Shift Register
+-------------------------------
+O1	10m		O5
+O2	60m		O6
+O3	6m		O7
+O4	2m		O8
+
+Antenna Shift Register
+----------------------
+O1	Ant 1		O5
+O2	Ant 2		O6
+O3	Ant 3		O7
+O4	Ant 4		O8	Dummy Load
+

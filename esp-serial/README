@@ -1,0 +1,7 @@
+Nothing is here yet, but soon there may be a little bit of code to use an
+esp8266 or esp32 as a wifi to serial bridge allowing use of 2.4ghz 802.11
+ISM band for secure remote control within whatever distance it supports.
+
+There are probably lots of bugs here, if code has appeared already...
+
+

@@ -1,0 +1,48 @@
+Quick guide:
+ This guide assumes you have working build environments for PIC16F32 and avr already...
+ - Try ./install-prereqs otherwise
+
+
+You probably wont be able to build ampduino and maintain prebuilt firmwares, ymmv.
+
+Build
+-----
+	If you wish to use pre-built firmwares, use 'make clean' instead of 'make distclean' below.
+
+	* Clean source tree
+		make distclean
+
+	* Edit configurations as needed:
+		- ampduino_config.h
+		- board.mk
+		- atu100/config.h
+		- ubitx/board.mk
+		- ubitx/defines.h
+
+	* Build everything, including firmware
+		make world
+
+Install
+-------
+	* Connect PICKit3 to atu-100 board and PC
+
+	* Upload firmware to ATU-100
+		make install-atu100
+
+	* Disconnect PICKit3 from PC and atu-100 board
+
+	* Connect ubitx arduino nano to PC usb
+
+	* Upload firmware to ubitx
+		make install-ubitx
+
+	* Disconnect USB from ubitx arduino and PC
+
+	* Connect mega2560 to USB
+
+	* Upload firmware to ampduino
+		make install-ampduino
+
+	* Disconnect mega2560 from USB and PC
+
+	* Connect the boards as shown elsewhere in docs/ and enjoy!

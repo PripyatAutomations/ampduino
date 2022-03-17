@@ -1,0 +1,47 @@
+there aren't many instructions available for these kits..
+
+here's how i built mine and some tips:
+
+
+TIPS
+----
+* SMD Capacitors, the BLACK marking goes TOWARD the square side (away from the different side).
+
+* When building transformers: Solder quickly, then take your time allowing ferrites to cool before starting another solder.
+
+* Try to keep transformers flat...
+
+Building
+--------
+
+I installed parts in following order
+
+	* Relay - Bend legs to match PCB, tin a corner and place.
+
+	* SMA connectors for LPF IN/LPF out (NOT included)
+
+	* SMA connectors for IN/OUT (included)
+
+	* PTT connector
+
+	* LPF bypass jumper
+
+	* Build and install choke L1
+		- 2 turns
+	  *** The enamel is VERY easy to scratch off while winding, be careful
+
+	* SMD caps
+
+	* Build transformers
+
+	* Mount transformers
+		* Large one (output) has 3 windings
+		* Small one (input) has 2 windings
+
+	* Wind transformers
+
+	* Install transistors
+
+	* Inspect/improve solder mask on bottom of board with nail polish as needed
+
+	* Mount to heat sink
