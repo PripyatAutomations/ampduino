@@ -3,6 +3,8 @@
 # first boot...
 gen-eeprom: eeprom-data.h
 
+eeprom.c: eeprom-data.h
+
 .tmp.eeprom.user: system.cf
 	cat system.cf | \
 	   egrep -v '^.*#' | \
@@ -21,7 +23,7 @@ eeprom-data.h: .tmp.eeprom.user
 	echo "" >> $@
 	echo "#if !defined(_eeprom_data_h)" >> $@
 	echo "const char factory_defaults[] = "{ >> $@
-	cat .tmp.eeprom >> $@
+	cat .tmp.eeprom.user >> $@
 	echo "};" >> $@
 	echo "#else" >> $@
 	echo "extern const char factory_defaults[];" >> $@

@@ -1,3 +1,5 @@
+all: arduino-all
+
 TARGET=ampduino
 AMPDUINO_VERSION=0.1
 ARDUINO_LIBS = EEPROM SPI Wire
@@ -38,11 +40,10 @@ CXXFLAGS_STD += -I./ext/RF24
 
 # Bring in board configuration
 include ./board.mk
-include $(ARDMK_DIR)/Arduino.mk
-include mk/customization.mk
+include mk/gen-eeprom.mk
+include mk/Arduino.mk
 include mk/firmware.mk
 include mk/esp-serial.mk
-include mk/gen-eeprom.mk
 include mk/indent.mk
 include mk/clean.mk
 include mk/install.mk
