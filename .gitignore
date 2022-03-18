@@ -18,5 +18,6 @@ atu-100/dist/default/production/*.p1
 atu-100/dist/default/production/*.xml
 atu-100/dist/*
 esp-serial/esp-serial.elf
+esp-serial/main.o
 .tmp.eeprom.user
 eeprom-data.h

@@ -33,33 +33,63 @@ bool config_load(void) {
 }
 
 bool EEPROMConfig::FactoryDefaults(void) {
+    /////////////////////
+    // Verify checksum //
+    /////////////////////
+    unsigned int read_sum = 0;
+    unsigned char lsb, msb;
+
+    // Read MSB
+    msb = EEPROM.read(EEPROM.length() - 1);
+
+    // Read LSB
+    lsb = EEPROM.read(EEPROM.length());
+
+    // combine
+    read_sum = (unsigned)lsb << 8 | msb;
+
+    // compare stored and calculated CRCs
+    if (this->CRC() != read_sum) {
+       // Alert("Invalid EEPROM config");
+       return false;
+    }
+
+    // Load the EEPROM
     this->LoadConfig(factory_defaults);
     return true;
 }
 
 bool EEPROMConfig::LoadConfig(const char *cdata) {
+    // We can't load empty config...
     if (cdata == NULL)
        return false;
 
+    // XXX: Validation
+    // XXX: Parser
+    return true;
 }
 
 bool EEPROMConfig::SaveConfig(void) {
-    unsigned int read_sum = 0;
-
-    unsigned int offset = 0, eeprom_sz = CF_EEPROM_SZ;
+    unsigned int offset = 0;
     unsigned int fd_sz = strlen(factory_defaults);
     unsigned int version = AMPDUINO_VERSION;
 
     // Set software version
+    // Write LSB
     EEPROM.put(0, (unsigned char)(version & 0xff));
+    // Write MSB
     EEPROM.put(1, (unsigned char)(version >> 8));
 
-    // Skip past version
+    // Skip past version bytes
     offset = 2;
     for (unsigned int i = 0; ((i < fd_sz) && i++); i++) {
        EEPROM.put(i + 2, factory_defaults[i]);
        offset++;
     }
+
+    // Write terminating byte (255);
+    offset++;
+    EEPROM.write(offset, 0xff);
 
     // Clear the remaining eeprom contents up to last 2 bytes (sum)
     for (; offset < (EEPROM.length() - 2); offset++) {
@@ -68,8 +98,12 @@ bool EEPROMConfig::SaveConfig(void) {
 
     // Calculate checksum and store it in EEPROM
     unsigned int sum = this->CRC();
-    EEPROM.write(EEPROM.length() - 1, (unsigned char)(sum & 0xff));
-    EEPROM.write(EEPROM.length(), (unsigned char)(sum >> 8));
+
+    // Write MSB
+    EEPROM.write(EEPROM.length() -1, (unsigned char)(sum >> 8));
+
+    // Write LSB
+    EEPROM.write(EEPROM.length(), (unsigned char)(sum & 0xff));
     return true;
 }
 
