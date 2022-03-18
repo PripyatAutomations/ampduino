@@ -25,6 +25,9 @@
 //ZZ
 #define CF_LORA
 
+// EEPROM size (mega2560 has 4k)
+#define	CF_EEPROM_SZ	4096
+
 // LPF bands
 #define	MAX_LPF_BANDS	6
 

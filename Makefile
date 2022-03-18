@@ -1,7 +1,7 @@
 all: world
 
 TARGET=ampduino
-AMPDUINO_VERSION=0.1
+AMPDUINO_VERSION=0x0002
 ARDUINO_LIBS = EEPROM SPI Wire
 
 # Linux tends to put it at /usr/share/arduino, check there
@@ -29,8 +29,8 @@ endif
 PROJECT_DIR = .
 ARDMK_DIR = ./mk
 USER_LIB_PATH    :=  ${PROJECT_DIR}/lib
-BUILDFLAGS = -DAMPDUINO=1
-COMM_CFLAGS = ${BUILDFLAGS}-I./include -Wall -pedantic -Wno-error
+BUILDFLAGS = -DAMPDUINO=1 -DAMPDUINO_VERSION=${AMPDUINO_VERSION}
+COMM_CFLAGS = ${BUILDFLAGS} -I./include -Wall -pedantic -Wno-error
 CFLAGS_STD       = ${COMM_CFLAGS} -std=gnu11 -Os
 CXXFLAGS_STD     = ${COMM_CFLAGS} -std=gnu++11 -Os -fno-rtti 
 CURRENT_DIR      = $(shell basename ${CURDIR})
