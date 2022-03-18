@@ -41,6 +41,11 @@ bool EEPROMConfig::LoadConfig(const char *cdata) {
     if (cdata == NULL)
        return false;
 
+}
+
+bool EEPROMConfig::SaveConfig(void) {
+    unsigned int read_sum = 0;
+
     unsigned int offset = 0, eeprom_sz = CF_EEPROM_SZ;
     unsigned int fd_sz = strlen(factory_defaults);
     unsigned int version = AMPDUINO_VERSION;
@@ -65,10 +70,6 @@ bool EEPROMConfig::LoadConfig(const char *cdata) {
     unsigned int sum = this->CRC();
     EEPROM.write(EEPROM.length() - 1, (unsigned char)(sum & 0xff));
     EEPROM.write(EEPROM.length(), (unsigned char)(sum >> 8));
-    return true;
-}
-
-bool EEPROMConfig::SaveConfig(void) {
     return true;
 }
 
