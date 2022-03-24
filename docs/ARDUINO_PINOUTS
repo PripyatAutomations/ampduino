@@ -1,0 +1,38 @@
+Analog
+------
+        A0		To LPF Board, Pin 1 (S-Meter)
+        A1		To +12V via divider (max 16V)
+        A2		To current sensor
+        A3
+        A4
+        A5
+        A6
+        A7
+
+        A8
+        A9
+        A10
+        A11
+        A12
+        A13
+        A14
+        A15
+
+Digital
+-------
+	DigiHeader	2-13 PWM, 0-1 serio0, 14-15 serio3, 16-17 serio2, 18-19 serio3, 20 SDA, 21 SCL
+	AnalogHeader	54-69 analog
+	ExtHeader	50-53 SPI, 44-45 PWM
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	10
+	11
+	12
+	13
+	

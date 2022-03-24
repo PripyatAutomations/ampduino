@@ -8,8 +8,12 @@
 class ad_Serial {
     private:
         bool	active;
+        int	pin_tx;
+        int	pin_rx;
+        int	baud_rate;
     public:
         bool	Write(const char *pkt);
+        bool	Read(char *buf, int size);
 };
 
 // defined(CF_SERIAL)

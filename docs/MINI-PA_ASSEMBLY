@@ -11,6 +11,8 @@ TIPS
 
 * Try to keep transformers flat...
 
+<kludge> rustytaco: first you need to find the right bias point.  Then write in the manual "Adjust the bias until you see so much drain current"
+
 Building
 --------
 
@@ -31,6 +33,8 @@ I installed parts in following order
 	  *** The enamel is VERY easy to scratch off while winding, be careful
 
 	* SMD caps
+		- Don't over tin the pads or they'll sit high and be easily broken off...
+		- Alternatively, put a THIN layer of paste and push capacitor straight down then heat the solder...
 
 	* Build transformers
 

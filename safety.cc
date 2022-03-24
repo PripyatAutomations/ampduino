@@ -1,5 +1,6 @@
 /*
- * Safety mechanisms
+ * Safety mechanisms to protect the amplifier and it's
+ * sections.
  */
 #include "ampduino.h"
 

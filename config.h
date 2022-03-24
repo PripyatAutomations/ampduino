@@ -115,5 +115,20 @@
 #define	FAN_SPEED_TX	800	// speed when transmitting
 #define	FAN_SPEED_MAX	800	// maximum supported speed (RPM)
 
+class Config {
+    private:
+        char *ptr;
+        bool alloced;	// is ptr malloc()'d?
+    public:
+        // Free PTR, if allocated
+        bool FreePtr(void);
+        // Load config from string and parse
+        bool LoadFromString(const char *data);
+        // Load config from EEPROM and parse
+        bool LoadFromEEPROM(void);
+        // Parse a loaded configuration
+        bool Parse(void);
+};
+
 // !defined(_config_h)
 #endif

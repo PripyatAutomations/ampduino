@@ -1,10 +1,30 @@
+Pinouts for ampduino on Mega2560
+--------------------------------
+LPF BOARD
+---------
+	Desc		LPF Pin		Mega Pin
+	----		-------		--------
+	1.9MHZ		13
+	3.5MHZ		12
+	10MHZ		10
+	14MHZ		9
+	21MHZ		7
+	28MHZ		5
+	GND		4
+	+12V		3
+
+
+
+Below is a proposed layout for using arduino nano
+-------------------------------------------------
+
 Pinouts for AMPduino
 --------------------
 	D1	serio RX from ATU-100 tuner
 	D2	serio TX to ATU-100 tuner
-	D3	LPF (Bands 1-8) Shift Register STROBE/select
-	D4	LPF (Bands 9-16) Shift Register STROBE/select
-	D5	Antenna Select (1-8) Shift Register STROBE/select
+	D3	LPF (Bands 1-8) Shift Register clocks
+	D4	LPF (Bands 9-16) Shift Register clocks
+	D5	Antenna Select (1-8) Shift Register clocks
 	D6	Shared Shift Reg serial-out
 	D7	Amp power/bypass control
 	D8	T/R relay
@@ -36,4 +56,3 @@ O1	Ant 1		O5
 O2	Ant 2		O6
 O3	Ant 3		O7
 O4	Ant 4		O8	Dummy Load
-

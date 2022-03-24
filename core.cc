@@ -4,6 +4,8 @@
 
 const char txt_ok[] = "\n+OK\n";
 
+// Uptime in seconds, maintained in loop()
+time_t now = 0;
 /////////////
 // Objects //
 /////////////
@@ -84,6 +86,10 @@ void loop() {
     radio.startListening();
 #endif
 
+    // XXX: update clock tick?
+    // if (second))
+    now++;
+
     // Power Management
     if (!CheckVoltages()) {
        halt_tx();
@@ -143,4 +149,11 @@ bool PTT_On(void) {
     // Make sure appropriate filter is selected before allowing TX
     // if (selected_lpf(
     return false;
+}
+
+// Allow rebooting the arduino
+void(*resetFunc)(void) = 0;
+
+void reboot(void) {
+     resetFunc();
 }

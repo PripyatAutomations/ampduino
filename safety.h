@@ -1,6 +1,14 @@
 #if	!defined(__safety_h)
 #define	__safety_h
 
+class Safety {
+    private:
+        bool	tx_ok;
+        bool	Transmitting;
+        bool	PendingTransmission;
+    public:
+};
+
 extern bool tx_ok;
 extern bool Transmitting;
 extern bool PendingTransmission;

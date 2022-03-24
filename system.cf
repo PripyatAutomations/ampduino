@@ -7,80 +7,78 @@ lora { };
 nrf24 {
 };
 
-# Radio Area Network topology   
-ran {
-   id = 01;
+my_id = 01;
 
-   transmitter {
-      type = ubitx;
-      address = 01;
-   };
-
-   receiver {
-      type = ubitx;
-      address = 01;
-   };
-
-   amplifier {
-      type = pa;
-      max_input = 5;
-      max_output = 70;
-   };
-
-   filter {
-      type = lpf;
-      bands = [ 160, 80, 40, 30, 20, 17, 15, 12, 10 ];
-      max_input = 100;
-   };
-
-   autotuner {
-      type = atu100;
-      max_input = 100;
-      has_swr = true;
-   };
-
-   switch {
-      id = 01;
-      inputs = 2;
-      outputs = 4;
-   };
-   
-   antenna {
-      switch = 01;      # Switch 01
-      port = 01;        # / Port 01
-      description = "40M dipole in the trees";
-      height = 350.0;	# Antenna height AMSL in meters
-      height_agl = 3.0;	# Antenna height AGL in meters
-      bands = [ 40, 30, 20, 17, 15, 12, 10 ];
-   };
-
-   antenna {
-      switch = 01;
-      port = 02;
-      description = "20M magloop";
-      bands = [ 20, 10 ];
-#      has_rotor = true;
-#      rotor = 01;
-#      has_tuning = true;
-#      # Support for tuning capacitors...
-#      tuning_type = stepper;
-#      tuning_steps = 32100;
-#      tuning_feedback = ldr;
-#      # Use a neon indicator and an LDR to detect far-end tune
-#      tuning_feedback_min = 100;
-#      tuning_feedback_max = 256;
-#      # Bypass ATU while tuning the loop capacitor, then re-enable and fine-tune matching with ATU.
-#      tuner_auto_finetune = true;
-   };
-
-#   rotor {
-#       id = 01;
-#       description = "Mag Loop Totem Pole";
-#       min_x = 0;     # We can rotate from 0 degrees to
-#       max_x = 180;   # about 180 degrees
-#       min_y = 0;     # No Y rotation
-#       max_y = 0;     # -
-#       min_z = 0;     # No Z rotation, either
-#       max_z = 0;     # -
-#   };
+transmitter {
+   type = ubitx;
+   address = 01;
 };
+
+receiver {
+   type = ubitx;
+   address = 01;
+};
+
+amplifier {
+   type = pa;
+   max_input = 5;
+   max_output = 70;
+};
+
+filter {
+   type = lpf;
+   bands = [ 160, 80, 40, 30, 20, 17, 15, 12, 10 ];
+#   pins = [    a,  b,  c,  d,  e,  f,  g,  h,  i ];
+   max_input = 100;
+};
+
+autotuner {
+   type = atu100;
+   max_input = 100;
+   has_swr = true;
+};
+
+switch {
+   id = 01;
+   inputs = 2;
+   outputs = 4;
+};
+
+antenna {
+   switch = 01;      # Switch 01
+   port = 01;        # / Port 01
+   description = "40M dipole in the trees";
+   height = 350.0;	# Antenna height AMSL in meters
+   height_agl = 3.0;	# Antenna height AGL in meters
+   bands = [ 40, 30, 20, 17, 15, 12, 10 ];
+};
+
+antenna {
+   switch = 01;
+   port = 02;
+   description = "20M magloop";
+   bands = [ 20, 10 ];
+#   has_rotor = true;
+#   rotor = 01;
+#   has_tuning = true;
+#   # Support for tuning capacitors...
+#   tuning_type = stepper;
+#   tuning_steps = 32100;
+#   tuning_feedback = ldr;
+#   # Use a neon indicator and an LDR to detect far-end tune
+#   tuning_feedback_min = 100;
+#   tuning_feedback_max = 256;
+#   # Bypass ATU while tuning the loop capacitor, then re-enable and fine-tune matching with ATU.
+#   tuner_auto_finetune = true;
+};
+
+#rotor {
+#    id = 01;
+#    description = "Mag Loop Totem Pole";
+#    min_x = 0;     # We can rotate from 0 degrees to
+#    max_x = 180;   # about 180 degrees
+#    min_y = 0;     # No Y rotation
+#    max_y = 0;     # -
+#    min_z = 0;     # No Z rotation, either
+#    max_z = 0;     # -
+# };

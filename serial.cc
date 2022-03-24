@@ -8,5 +8,9 @@ bool ad_Serial::Write(const char *pkt) {
     return true;
 }
 
+bool ad_Serial::Read(char *buf, int size) {
+    return true;
+}
+
 // defined(CF_SERIAL)
 #endif

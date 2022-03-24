@@ -32,30 +32,32 @@ bool config_load(void) {
     return true;
 }
 
+// Place the builtin ('factory' default) configuration into eeprom and reboot
 bool EEPROMConfig::FactoryDefaults(void) {
     /////////////////////
     // Verify checksum //
     /////////////////////
-    unsigned int read_sum = 0;
-    unsigned char lsb, msb;
+//    unsigned int read_sum = 0;
+//    unsigned char lsb, msb;
 
     // Read MSB
-    msb = EEPROM.read(EEPROM.length() - 1);
+//    msb = EEPROM.read(EEPROM.length() - 1);
 
     // Read LSB
-    lsb = EEPROM.read(EEPROM.length());
+//    lsb = EEPROM.read(EEPROM.length());
 
     // combine
-    read_sum = (unsigned)lsb << 8 | msb;
+//    read_sum = (unsigned)lsb << 8 | msb;
 
     // compare stored and calculated CRCs
-    if (this->CRC() != read_sum) {
-       // Alert("Invalid EEPROM config");
-       return false;
-    }
+//    if (this->CRC() != read_sum) {
+//       // Alert("Invalid EEPROM config");
+//       return false;
+//    }
 
     // Load the EEPROM
     this->LoadConfig(factory_defaults);
+    reboot();
     return true;
 }
 

@@ -1,0 +1,6 @@
+Some suggestions and recommend changes for the RV3YKF LPF kit are below:
+
+Changes
+-------
+	- Install jumper wire instead of diodes next to pin header so that coils can be powered either way
+	  this requires a few more IO pins but i feel its worth it on mega.

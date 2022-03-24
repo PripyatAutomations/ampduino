@@ -14,18 +14,13 @@
 #include <ampduino/config.h>
 #endif
 
+#include <time.h>
+
 /////////////////////////////////////////////
 // Defines the version of protocol we speak.
 // No backwards or forwards compatibility will be provided.
 /////////////////////////////////////////////
 #define	AMPDUINO_PROTOCOL	0x0001
-
-//////////
-// HALT //
-//////////
-#define	HALT_MISC		0x00
-#define	HALT_LOWVOLTS		0x01
-#define	HALT_OVERCURRENT	0x02
 
 //////////////////
 // Device Types //
@@ -146,9 +141,18 @@ struct ad_config {
 };
 typedef struct ad_config	AmpduinoConfig;
 
+enum ShutdownReason {
+    SHUTDOWN_UNKNOWN = 0,
+    SHUTDOWN_LOWVOLTS,
+    SHUTDOWN_OVERCURRENT,	// Overcurrent protection
+    SHUTDOWN_THERMAL,		// Subsystem overheated
+    SHUTDOWN_QUOTA		// nyi: max watts/day quota
+};
+
 #if	defined(AMPDUINO)
 // core.cc: Main configuration + status registers
 extern AmpduinoConfig cfg;
+extern time_t now;
 
 ///////////////////////
 // Functions for API //
@@ -157,6 +161,7 @@ extern int ampduino_parse(const char *buf);
 extern void Log(const char *msg);
 extern void Alert(const char *msg);
 extern int ampduino_send_msg(const unsigned int src, const unsigned int dest, const char *msg);
+extern void reboot(void);
 
 ///////////////
 // Utilities //
@@ -181,7 +186,9 @@ extern int ampduino_send_msg(const unsigned int src, const unsigned int dest, co
 #include "lora.h"
 #include "receiver.h"
 #include "antenna.h"
+#include "battery.h"
 #endif
+
 // defined(AMPDUINO)
 // !defined(_ampduino_h)
 #endif
