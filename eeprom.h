@@ -12,8 +12,6 @@ class EEPROMConfig {
         bool SaveConfig(void);
         unsigned long CRC(void);
 };
-extern AmpduinoConfig cfg;
-extern bool config_load(void);
 
 ////////////////////////
 // EEPROM Data Layout //

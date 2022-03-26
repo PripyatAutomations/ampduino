@@ -26,6 +26,8 @@ class Battery {
 
         // Update statistics (called from main loop)
         bool UpdateStatistics(void);
+        float GetVoltage(void);
+        float GetCurrent(void);
 };
 
 #endif	// !defined(_battery_h)

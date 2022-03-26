@@ -94,53 +94,6 @@ struct ad_packet{
 };
 typedef struct ad_packet AmpduinoPacket;
 
-///////////////////
-// Configuration //
-///////////////////
-struct ad_config {
-    // Amplifier Configuration
-    //////////////////////////
-    float	tx_power;	// Desired transmit power
-    float	rx_gain;	// Desired LNA gain level
-    float	max_swr;	// Maximum allowed swr
-    float	max_power;	// Maximum allowed power output
-    float	monitor_atten;	// Monitor attenuation
-    float	fan_speed;	// Fan speed (RPM)
-    int		antenna;	// Selected antenna ID
-    int		band;		// Band selection (for tranverters/LPFs)
-
-    // Thermal Management
-    /////////////////////
-    float	max_finals_temp;
-    float	max_system_temp;
-
-    // Power Management
-    ///////////////////
-    float	max_current;
-    float	min_voltage;
-
-    // Current status
-    /////////////////
-    struct {
-        bool	transmitting;	// Are we transmitting?
-        float	tx_power;	// Measured Transmit Power
-        float	swr;		// SWR
-
-        // Thermals
-        ///////////
-        float	temp_finals;	// transistor temperature
-        float	temp_system;	// temperature inside box
-
-        // Power Management
-        ///////////////////
-        float	voltage_idle,
-                voltage_last_tx;
-        float	current_idle,
-                current_last_tx;
-    } status;
-};
-typedef struct ad_config	AmpduinoConfig;
-
 enum ShutdownReason {
     SHUTDOWN_UNKNOWN = 0,
     SHUTDOWN_LOWVOLTS,
@@ -151,8 +104,8 @@ enum ShutdownReason {
 
 #if	defined(AMPDUINO)
 // core.cc: Main configuration + status registers
-extern AmpduinoConfig cfg;
 extern time_t now;
+extern Config *cfg;
 
 ///////////////////////
 // Functions for API //

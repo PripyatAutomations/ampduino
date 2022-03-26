@@ -27,14 +27,14 @@ bool ad_Amplifier::SetPTT(bool state) {
 float ad_Amplifier::GetFinalsTemp(void) {
     // Sample the ADC pin
     // Scale the value
-    return (cfg.status.temp_finals);
+    return (cfg->status.temp_finals);
 }
 
 // Get enclosure temperature of device
 float ad_Amplifier::GetSystemTemp(void) {
     // Sample the ADC pin
     // Scale the value
-    return (cfg.status.temp_system);
+    return (cfg->status.temp_system);
 }
 
 // defined(CF_AMPLIFIERS)

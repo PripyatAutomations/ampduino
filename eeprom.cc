@@ -9,28 +9,6 @@
 #define	EEPROM_C
 #include "eeprom-data.h"
 #include "ampduino.h"
-// create data array
-
-AmpduinoConfig cfg;
-
-// Load configuration (XXX: move to eeprom)
-bool config_load(void) {
-    // Clear our in-memory structure
-    memset(&cfg, 0, sizeof(AmpduinoConfig));
-    memset(&cfg.status, 0, sizeof(cfg.status));
-
-    // Initialize some hard-coded default configuration
-    //
-    cfg.max_swr = MAX_SWR;
-    cfg.max_power = MAX_POWER;
-    cfg.monitor_atten = MONITOR_ATTEN;
-    cfg.max_finals_temp = MAX_TEMP_FINALS;
-    cfg.max_system_temp = MAX_TEMP_SYSTEM;
-    cfg.max_current = MAX_CURRENT;
-    cfg.min_voltage = MIN_VOLTAGE;
-    cfg.fan_speed = FAN_SPEED_IDLE;
-    return true;
-}
 
 // Place the builtin ('factory' default) configuration into eeprom and reboot
 bool EEPROMConfig::FactoryDefaults(void) {

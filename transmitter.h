@@ -9,12 +9,19 @@ enum TX_RADIO_TYPE {
     TX_RADIO_UBITX				// ubitx (v6?) running modified version of N8ME's firmware
 };
 
+enum TX_RADIO_STATE {
+    TX_BLOCKED = 0,				// Transmit not allowed
+    TX_PENDING,					// Preparing to allow TX
+    TX_ALLOWED					// Transmission is allowed
+};
+
 class ad_Transmitter {
     private:
         bool enabled;
-        enum TX_RADIO_TYPE radio_type;
 
     public:
+        enum TX_RADIO_TYPE radio_type;
+        enum TX_RADIO_STATE radio_state;
         bool Enabled(void);
         bool Enable(void);
         bool Disable(void);

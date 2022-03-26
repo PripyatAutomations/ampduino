@@ -119,15 +119,56 @@ class Config {
     private:
         char *ptr;
         bool alloced;	// is ptr malloc()'d?
+
     public:
+        float	tx_power;	// Desired transmit power
+        float	rx_gain;	// Desired LNA gain level
+        float	max_swr;	// Maximum allowed swr
+        float	max_power;	// Maximum allowed power output
+        float	monitor_atten;	// Monitor attenuation
+        float	fan_speed;	// Fan speed (RPM)
+        int		antenna;	// Selected antenna ID
+        int		band;		// Band selection (for tranverters/LPFs)
+
+        // Thermal Management
+        /////////////////////
+        float	max_finals_temp;
+        float	max_system_temp;
+
+        // Power Management
+        ///////////////////
+        float	max_current;
+        float	min_voltage;
+
+        // Current status
+        /////////////////
+        struct {
+            bool	transmitting;	// Are we transmitting?
+            float	tx_power;	// Measured Transmit Power
+            float	swr;		// SWR
+
+            // Thermals
+            ///////////
+            float	temp_finals;	// transistor temperature
+            float	temp_system;	// temperature inside box
+
+            // Power Management
+            ///////////////////
+            float	voltage_idle,
+                    voltage_last_tx;
+            float	current_idle,
+                    current_last_tx;
+        } status;
+        /////////////////////
         // Free PTR, if allocated
         bool FreePtr(void);
         // Load config from string and parse
-        bool LoadFromString(const char *data);
+        bool LoadFromString(char *data);
         // Load config from EEPROM and parse
         bool LoadFromEEPROM(void);
         // Parse a loaded configuration
         bool Parse(void);
+        Config(void);
 };
 
 // !defined(_config_h)

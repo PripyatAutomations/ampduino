@@ -13,12 +13,12 @@ bool Config::FreePtr(void) {
     return true;
 }
 
-bool Config::LoadFromString(const char *data) {
+bool Config::LoadFromString(char *data) {
     if (data == NULL)
        return false;
 
     this->FreePtr();
-    this->ptr = data;
+    this->ptr = (char *)data;
     this->Parse();
 
     return true;
@@ -32,7 +32,7 @@ bool Config::LoadFromEEPROM(void) {
     if (EEPROM.length() == 0)
        return false;
 
-    if ((eeprom_data = malloc(EEPROM.length())) == NULL)
+    if ((eeprom_data = (char *)malloc(EEPROM.length())) == NULL)
        return false;
 
     // set flag so we can free this later...
@@ -57,4 +57,16 @@ bool Config::Parse(void) {
     char *section = NULL;
 
     return true;
+}
+
+// Load configuration (XXX: move to eeprom)
+Config::Config(void) {
+    this->max_swr = MAX_SWR;
+    this->max_power = MAX_POWER;
+    this->monitor_atten = MONITOR_ATTEN;
+    this->max_finals_temp = MAX_TEMP_FINALS;
+    this->max_system_temp = MAX_TEMP_SYSTEM;
+    this->max_current = MAX_CURRENT;
+    this->min_voltage = MIN_VOLTAGE;
+    this->fan_speed = FAN_SPEED_IDLE;
 }

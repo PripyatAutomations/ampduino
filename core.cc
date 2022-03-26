@@ -41,6 +41,9 @@ ad_Rotator *rotator[MAX_ROTORS];			// Rotators for antennaes
 #endif
 ad_Antenna *antennas[MAX_ANTENNAS];			// Antennas
 
+// config.cc / config.h
+Config *cfg;
+
 // IMMEDIATELY stop all transmissions
 void halt_tx(void) {
     // XXX:
@@ -48,7 +51,7 @@ void halt_tx(void) {
 
 void setup() {
     // Load configuration blob from eeprom
-    config_load();
+    cfg = new Config;
 
     // Serial configuration SHOULD be in eeprom...
     Serial.begin(9600);

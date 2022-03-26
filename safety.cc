@@ -31,7 +31,7 @@ bool PendingTransmit(void) {
 
 // SWR protection
 bool SWR_Lockout(void) {
-   if (cfg.status.swr < cfg.max_swr)
+   if (cfg->status.swr < cfg->max_swr)
       return false;
 
    return true;
@@ -42,10 +42,10 @@ bool SWR_Lockout(void) {
 ////////////////////////
 // CheckThermals: Returns true if temperatures OK
 bool CheckThermals(void) {
-     if (cfg.status.temp_finals >= cfg.max_finals_temp)
+     if (cfg->status.temp_finals >= cfg->max_finals_temp)
         return false;
 
-     if (cfg.status.temp_system >= cfg.max_system_temp)
+     if (cfg->status.temp_system >= cfg->max_system_temp)
         return false;
 
      return true;
@@ -56,14 +56,14 @@ bool CheckThermals(void) {
 //////////////////////
 // Are voltages above threshold
 bool CheckVoltages(void) {
-     if (cfg.status.voltage_idle < cfg.min_voltage) {
+     if (cfg->status.voltage_idle < cfg->min_voltage) {
         Alert("LOW VOLT");
         // halt_tx(HALT_LOWVOLTS);
         // schedule_shutdown(HALT_LOWVOLTS);
         return false;
      }
 
-     if (cfg.status.voltage_last_tx < cfg.min_voltage) {
+     if (cfg->status.voltage_last_tx < cfg->min_voltage) {
         Alert("LOW VOLT LAST_TX");
         // halt_tx(HALT_LOWVOLTS);
         // schedule_shutdown(HALT_LOWVOLTS);
@@ -75,7 +75,7 @@ bool CheckVoltages(void) {
 
 // Are exceeding maximum current allowed RIGHT NOW?
 bool CheckCurrents(void) {
-     if (cfg.status.current_idle < cfg.max_current) {
+     if (cfg->status.current_idle < cfg->max_current) {
         Alert("OVERCURRENT");
         // halt_tx(HALT_OVERCURRENT);
         return false;
