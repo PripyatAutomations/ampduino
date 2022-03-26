@@ -6,43 +6,39 @@ const char txt_ok[] = "\n+OK\n";
 
 // Uptime in seconds, maintained in loop()
 time_t now = 0;
-/////////////
-// Objects //
-/////////////
-// XXX: this all needs to be dynamically created from config
-#if	defined(CF_LORA)
-ad_LoRa *lora = new ad_LoRa;
+
+Battery *battery;
+Config *cfg;
+EEPROMConfig *eeprom;
+Safety *safety;
+
+// These bits need to be dynamic from config...
+#if	defined(CF_AMPLIFIERS)
+ad_Amplifier *amps[MAX_AMPLIFIERS];
 #endif
-#if	defined(CF_TRANSMITTERS)
-ad_Transmitter *transmitter = new ad_Transmitter;	// Transmitters
+ad_Antenna *ants[MAX_ANTENNAS];
+#if	defined(CF_DISPLAY)
+ad_Display *display;
+#endif
+ad_Filter *filters[MAX_FILTERS];
+#if	defined(CF_LORA)
+ad_LoRa *lora;
 #endif
 #if	defined(CF_RECEIVERS)
-ad_Receiver *receiver = new ad_Receiver;		// Receivers
+ad_Receiver *receivers[MAX_RECEIVERS];
 #endif
-#if	defined(CF_TRANVERTERS)
-ad_Transverter *transverter[MAX_TRANSVERTERS];		// Band transverters
-#endif
-#if	defined(CF_AMPLIFERS)
-ad_Amplifier *tx_amp = new ad_Amplifier;		// TX Power Amplifier
-ad_Amplifier *rx_amp = new ad_Amplifier;		// RX Low Noise Amplifier
-#endif
-#if	defined(CF_FILTERS)
-ad_Filter *lpf[MAX_LPF_BANDS];				// TX Low Pass Filters
-ad_Filter *bpf[MAX_BPF_BANDS];				// RX Band Pass Filters
-#endif
-#if	defined(CF_TUNERS)
-ad_AutoTuner *tuner = new ad_AutoTuner;			// Antenna Tuners
-#endif
-#if	defined(CF_SWITCHES)
-ad_Switch *switches[MAX_SWITCHES];			// Antenna Switchers
+#if	defined(CF_TRANSMITTERS)
+ad_Transmitter *transmitters[MAX_TRANSMITTERS];
 #endif
 #if	defined(CF_ROTORS)
-ad_Rotator *rotator[MAX_ROTORS];			// Rotators for antennaes
+ad_Rotator *rotors[MAX_ROTORS];
 #endif
-ad_Antenna *antennas[MAX_ANTENNAS];			// Antennas
-
-// config.cc / config.h
-Config *cfg;
+#if	defined(CF_SWITCHES)
+ad_Switch *switches[MAX_SWITCHES];
+#endif
+#if	defined(CF_TUNERS)
+ad_AutoTuner *tuners[MAX_TUNERS];
+#endif
 
 // IMMEDIATELY stop all transmissions
 void halt_tx(void) {
@@ -50,36 +46,92 @@ void halt_tx(void) {
 }
 
 void setup() {
-    // Load configuration blob from eeprom
-    cfg = new Config;
+    eeprom = new EEPROMConfig();
+    cfg = new Config();
+
+    // Loading configuration from EEPROM failed, restore factory default
+    if (cfg->LoadFromEEPROM() == false) {
+       eeprom->FactoryDefaults();
+    }
+
+#if	defined(CF_DISPLAY)
+    // Setup LCD, if present
+    display = new ad_Display();
+#endif
 
     // Serial configuration SHOULD be in eeprom...
     Serial.begin(9600);
+#if	defined(CF_LORA)
+    lora = new ad_LoRa;
+#endif
 #if	defined(CF_NRF24)
     nrf24_radio_init();
 #endif
-#if	defined(CF_SWITCHES)
-    //////
-    // XXX: All this needs to be in eeprom...
-    //////
-    switches[0] = new ad_Switch(SWITCH_INPUTS, SWITCH_OUTPUTS);
+
+    // Bring up battery and power management systems
+    battery = new Battery();
+    safety = new Safety();
+
+#if	defined(CF_AMPLIFIERS)
+    // Initialize amplifiers
+    int nr_amps = MAX_AMPLIFIERS;
+    for (int i = 0; i < (nr_amps - 1); i++) {
+       amps[i] = new ad_Amplifier();
+    }
 #endif
 
-    /////////////////
-    // Transmitter //
-    /////////////////
-#if	defined(CF_FILTERS)
-    // Create LPF objects
-    for (int i = 0; i < MAX_LPF_BANDS; i++)
-        lpf[i] = new ad_Filter;
+    // Initialize antennas
+    int nr_ants = MAX_ANTENNAS;
+    for (int i = 0; i < (nr_ants - 1); i++) {
+       ants[i] = new ad_Antenna();
+    }
 
-    // XXX: This needs to be moved to configuration
-    lpf[0]->Setup(FILTER_LPF, 1900.0, 2000.0, 1, 0);
-    lpf[1]->Setup(FILTER_LPF, 3500.0, 4000.0, 1, 1);
-    lpf[2]->Setup(FILTER_LPF, 7000.0, 11000.0, 1, 2);
-    lpf[3]->Setup(FILTER_LPF, 14000.0, 15000.0, 1, 3);
-    lpf[4]->Setup(FILTER_LPF, 18000.0, 21500.0, 1, 4);
-    lpf[5]->Setup(FILTER_LPF, 23000.0, 28500.0, 1, 5);
+#if	defined(CF_FILTERS)
+    // Initialize filters
+    int nr_filters = MAX_FILTERS;
+    for (int i = 0; i < (nr_filters - 1); i++) {
+       filters[i] = new ad_Filter();
+    }
+#endif
+
+#if	defined(CF_RECEIVERS)
+    // Initialize receivers
+    int nr_receivers = MAX_RECEIVERS;
+    for (int i = 0; i < (nr_receivers - 1); i++) {
+       receivers[i] = new ad_Receiver();
+    }
+#endif
+
+#if	defined(CF_TRANSMITTERS)
+    // Initialize transmitters
+    int nr_transmitters = MAX_TRANSMITTERS;
+    for (int i = 0; i < (nr_transmitters - 1); i++) {
+       transmitters[i] = new ad_Transmitter();
+    }
+#endif
+
+#if	defined(CF_ROTORS)
+    // Initialize rotors
+    int nr_rotors = MAX_ROTORS;
+    for (int i = 0; i < (nr_rotors - 1); i++) {
+       rotors[i] = new ad_Rotator();
+    }
+#endif
+
+#if	defined(CF_SWITCHES)
+    // Initialize rotors
+    int nr_switches = MAX_SWITCHES;
+    for (int i = 0; i < (nr_switches - 1); i++) {
+       switches[i] = new ad_Switch(1, 2);
+    }
+#endif
+
+#if	defined(CF_TUNERS)
+    // Initialize rotors
+    int nr_tuners = MAX_TUNERS;
+    for (int i = 0; i < (nr_tuners - 1); i++) {
+       tuners[i] = new ad_AutoTuner();
+    }
 #endif
 }
 
@@ -92,6 +144,9 @@ void loop() {
     // XXX: update clock tick?
     // if (second))
     now++;
+
+    // Update battery stats
+    battery->UpdateStatistics();
 
     // Power Management
     if (!CheckVoltages()) {

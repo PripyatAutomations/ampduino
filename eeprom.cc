@@ -3,7 +3,6 @@
 //
 // For now, we load compile-time defaults and in the near future
 // will support saving and loading configuration from EEPROM.
-
 #include <string.h>
 #include <EEPROM.h>
 #define	EEPROM_C
@@ -12,12 +11,31 @@
 
 // Place the builtin ('factory' default) configuration into eeprom and reboot
 bool EEPROMConfig::FactoryDefaults(void) {
+    // Write factory defaults into the EEPROM from eeprom_data.h...
+    // XXX:
+
+    Alert("FACT. RESET OK. REBOOTING!");
+    //delay(3000);
+    reboot();
+    return true;
+}
+
+bool EEPROMConfig::LoadConfig(void) {
+    unsigned int read_sum = 0;
+    unsigned char lsb, msb;
+    char *eeprom_data = NULL;
+    
+    if (EEPROM.length() > 0) {
+       eeprom_data = (char *)malloc(EEPROM.length());
+       if (eeprom_data == NULL) {
+          Alert("malloc failed loading eeprom");
+          abort();
+       }
+    }
+
     /////////////////////
     // Verify checksum //
     /////////////////////
-//    unsigned int read_sum = 0;
-//    unsigned char lsb, msb;
-
     // Read MSB
 //    msb = EEPROM.read(EEPROM.length() - 1);
 
@@ -33,19 +51,11 @@ bool EEPROMConfig::FactoryDefaults(void) {
 //       return false;
 //    }
 
-    // Load the EEPROM
-    this->LoadConfig(factory_defaults);
-    reboot();
-    return true;
-}
-
-bool EEPROMConfig::LoadConfig(const char *cdata) {
-    // We can't load empty config...
-    if (cdata == NULL)
-       return false;
+    // XXX: Read the eeprom into our buffer
 
     // XXX: Validation
     // XXX: Parser
+    free(eeprom_data);
     return true;
 }
 

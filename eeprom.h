@@ -1,3 +1,6 @@
+//
+// Support for storing our configuration in the EEPROM
+//
 #if	!defined(_eeprom_h)
 #define	__eeprom_h
 class EEPROMConfig {
@@ -6,7 +9,7 @@ class EEPROMConfig {
         bool FactoryDefaults(void);
 
         // Load the configuration from EEPROM
-        bool LoadConfig(const char *cdata);
+        bool LoadConfig(void);
 
         // Save configuration to EEPROM
         bool SaveConfig(void);

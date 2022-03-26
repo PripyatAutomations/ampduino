@@ -37,10 +37,12 @@
 // Receiver Support
 //////////////////////
 #define CF_RECEIVERS
+#define	MAX_RECEIVERS 1
 
 // Transmitter Support
 //////////////////////
 #define CF_TRANSMITTERS
+#define	MAX_TRANSMITTERS 1
 
 // Transverter support
 //////////////////////
@@ -50,14 +52,17 @@
 // Amplifier Support
 ////////////////////
 #define CF_AMPLIFIERS
+#define	MAX_AMPLIFIERS	1
 
 // Filters Support
 //////////////////
 #define CF_FILTERS
+#define	MAX_FILTERS	6
 
 // Tuners Support
 /////////////////
 #define CF_TUNERS
+#define	MAX_TUNERS	1
 
 // Memory slots in auto tuner
 #define	MAX_TUNER_MEMORIES 100

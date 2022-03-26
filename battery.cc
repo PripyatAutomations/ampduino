@@ -7,8 +7,6 @@
 #include "ampduino.h"
 
 bool Battery::Shutdown(enum ShutdownReason reason) {
-    // From safety.cc
-    
     return true;
 }
 
