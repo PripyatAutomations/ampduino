@@ -54,6 +54,11 @@ void setup() {
        eeprom->FactoryDefaults();
     }
 
+    safety = new Safety();
+/////////////
+// XXX: This crap needs moved into config.cc
+// XXX: to be called as config is parsed...
+/////////////
 #if	defined(CF_DISPLAY)
     // Setup LCD, if present
     display = new ad_Display();
@@ -149,11 +154,11 @@ void loop() {
     battery->UpdateStatistics();
 
     // Power Management
-    if (!CheckVoltages()) {
+    if (!safety->CheckVoltages()) {
        halt_tx();
     }
 
-    if (!CheckCurrents()) {
+    if (!safety->CheckCurrents()) {
        halt_tx();
     }
 
@@ -171,6 +176,12 @@ void loop() {
        radio.stopListening();
        radio.write(&txt_ok, sizeof(txt_ok));
     } 
+#endif
+#if	defined(CF_LORA)
+    // XXX: Read LoRa packets
+#endif
+#if	defined(CF_SERIAL)
+    // XXX: Read the serial port
 #endif
 }
 
@@ -199,7 +210,7 @@ void Alert(const char *msg) {
 
 bool PTT_On(void) {
     // Confirm TX is allowed
-    if (!tx_ok) {
+    if (!safety->CanTransmit()) {
        halt_tx();
        Alert("PTT blocked, TX_OK != true");
     }

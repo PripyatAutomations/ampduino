@@ -7,17 +7,13 @@ class Safety {
         bool	Transmitting;
         bool	PendingTransmission;
     public:
+        bool CanTransmit(void);
+        bool PendingTransmit(void);
+        bool SWR_Lockout(void);
+        bool CheckThermals(void);
+        bool CheckVoltages(void);
+        bool CheckCurrents(void);
 };
 
-extern bool tx_ok;
-extern bool Transmitting;
-extern bool PendingTransmission;
-
-extern bool CanTransmit(void);
-extern bool PendingTransmit(void);
-extern bool SWR_Lockout(void);
-extern bool CheckThermals(void);
-extern bool CheckVoltages(void);
-extern bool CheckCurrents(void);
 
 #endif

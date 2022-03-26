@@ -46,7 +46,7 @@
 
 // Transverter support
 //////////////////////
-//#define CF_TRANVERTERS
+#define CF_TRANVERTERS
 #define	MAX_TRANSVERTERS 0
 
 // Amplifier Support

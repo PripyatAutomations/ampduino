@@ -31,7 +31,6 @@ bool Battery::UpdateStatistics(void) {
        return false;
     }
 
-
     // Update things that need to happen every loop
     float tmp;
 

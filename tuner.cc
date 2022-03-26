@@ -85,7 +85,7 @@ struct ad_TunerMemory *ad_AutoTuner::FindMemoryById(unsigned int id) {
      struct ad_TunerMemory *mp = NULL;
 
      if (id > MAX_TUNER_MEMORIES) {
-        Log("ERR Couldnt find requested tuner memory");
+        Alert("Cant that tuner memory");
         return mp;
      }
 

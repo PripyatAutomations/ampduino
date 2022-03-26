@@ -42,6 +42,8 @@ bool Config::LoadFromEEPROM(void) {
     // Read in EEPROM data...
 
     // Confirm checksum
+
+    // Parse it
     this->Parse();
 
     return true;
