@@ -13,8 +13,12 @@
 bool EEPROMConfig::FactoryDefaults(void) {
     // Write factory defaults into the EEPROM from eeprom_data.h...
     // XXX:
+    if (factory_defaults == NULL) {
+       Alert("NO FACTORY CFG");
+       return false;
+    }
 
-    Alert("FACT. RESET OK. REBOOTING!");
+    Alert("FACT RESET OK. REBOOTING!");
     //delay(3000);
     reboot();
     return true;

@@ -63,6 +63,7 @@ bool Config::Parse(void) {
 
 // Load configuration (XXX: move to eeprom)
 Config::Config(void) {
+    // set some defaults, for cases where EEPROM is empty and no factory defaults
     this->max_swr = MAX_SWR;
     this->max_power = MAX_POWER;
     this->monitor_atten = MONITOR_ATTEN;

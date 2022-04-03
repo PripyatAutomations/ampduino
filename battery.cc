@@ -6,6 +6,9 @@
  */
 #include "ampduino.h"
 
+// from core.cc:
+extern Safety *safety;
+
 bool Battery::Shutdown(enum ShutdownReason reason) {
     return true;
 }
@@ -54,8 +57,8 @@ bool Battery::UpdateStatistics(void) {
     if (this->State.max_current < tmp)
        this->State.max_current = tmp;
 
-    // XXX: This needs to be averaged over non-TX time...
-    if (this->State.idle_current < tmp)
+    // We don't average during TX...
+    if (!safety->IsTransmitting() && (this->State.idle_current < tmp))
        this->State.idle_current = tmp;
 
     // set current current
@@ -69,5 +72,6 @@ bool Battery::UpdateStatistics(void) {
 
     // Set our last updated time
     this->State.last_update = now;
+
     return true;
 }

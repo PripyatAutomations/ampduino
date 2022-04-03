@@ -11,11 +11,14 @@ class ad_Receiver {
     private:
         bool enabled;
         enum RX_RADIO_TYPE radio_type;
+        unsigned int num_vfo;		// how many VFOs does it have?
+        unsigned int active_vfo;	// which VFO is active?
 
     public:
         bool Enable(void);
         bool Disable(void);
-        bool Tune(int vfo, float frequency);
+        bool Tune(unsigned int vfo, float frequency);
+        bool SelectVFO(unsigned int vfo);
 };
 
 // defined(CF_RECEIVERS)

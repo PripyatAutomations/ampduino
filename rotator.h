@@ -2,12 +2,18 @@
 // Support for antenna rotors
 #if	!defined(_rotator_h)
 #define	_rotator_h
+struct Coordinate {
+    unsigned int x, y, z;
+};
+typedef struct Coordinate Coordinate;
+
 class ad_Rotator {
     private:
-        unsigned int	x_angle_min, x_angle_max;
-        unsigned int	y_angle_min, y_angle_max;
-        unsigned int	z_angle_min, z_angle_max;
-        unsigned int	x_angle, y_angle, z_angle;
+        Coordinate min, max, current;
+    public:
+        Coordinate *GetPosition(void);
+        bool SetPosition(Coordinate *c);
+        bool SetPosition(unsigned int x, unsigned int y, unsigned int z);
 };
 
 #endif

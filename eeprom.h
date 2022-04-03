@@ -13,6 +13,8 @@ class EEPROMConfig {
 
         // Save configuration to EEPROM
         bool SaveConfig(void);
+
+        // Generate a CRC of the flash (excluding checksum bytes)
         unsigned long CRC(void);
 };
 

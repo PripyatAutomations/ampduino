@@ -13,6 +13,7 @@ class Safety {
         bool CheckThermals(void);
         bool CheckVoltages(void);
         bool CheckCurrents(void);
+        bool IsTransmitting(void);
 };
 
 

@@ -1,5 +1,5 @@
 //
-// Implement control of receive-only radios (NYI)
+// Implement control of receive-only radios
 //
 #include "ampduino.h"
 
@@ -14,7 +14,18 @@ bool ad_Receiver::Disable(void) {
 }
 
 // Set the frequency of one of the receiver's VFOs
-bool ad_Receiver::Tune(int vfo, float frequency) {
+bool ad_Receiver::Tune(unsigned int vfo, float frequency) {
+    return true;
+}
+
+// Sele
+bool ad_Receiver::SelectVFO(unsigned int vfo) {
+    if (vfo > this->num_vfo) {
+       Alert("No such VFO on this radio");
+       return false;
+    }
+    this->active_vfo = vfo;
+
     return true;
 }
 

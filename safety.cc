@@ -73,3 +73,7 @@ bool Safety::CheckCurrents(void) {
      }
      return true;
 }
+
+bool Safety::IsTransmitting(void) {
+    return this->Transmitting;
+}

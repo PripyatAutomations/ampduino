@@ -41,12 +41,12 @@ ad_Antenna *ad_Switch::GetAntenna(unsigned int output) {
 // Assign an antenna to an output port
 bool ad_Switch::SetAntenna(unsigned int output, ad_Antenna *antenna) {
    if (output > this->outputs) {
-      Log("Attempt to set antenna to output > max");
+      Log("Ant# too high");
       return false;
    }
 
    if (this->antennas[output] != NULL) {
-      Log("SetAntenna called but output is already set");
+      Log("Ant Already Set");
    }
 
    this->antennas[output] = antenna;

@@ -1,5 +1,4 @@
-#
-# Here you should define your Radio and it's components
+# Here you setup your arduino board
 #
 # The build system will figure out the rest...
 
@@ -18,19 +17,8 @@ TARGET_AVR = y
 
 # Serial monitor port
 MONITOR_PORT      = /dev/ttyUSB0
-# Serial monitor (and CAT) baudrate
+
+# Serial monitor baudrate
 MONITOR_BAUDRATE  = 115200
 
 FLASH_BAUDRATE  = 57600
-
-RADIO_TYPE = ubitx
-
-#########
-# XXX: Move this stuff into configs!
-#########
-
-#######################
-# Set the color theme #
-#######################
-# N/A here?
-THEME := night
